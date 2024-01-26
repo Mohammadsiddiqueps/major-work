@@ -1,0 +1,119 @@
+.mainsignin{
+    display: flex;
+    width: 1300px;
+    justify-content: center;
+    height:550px;
+   //margin: 50px;
+        
+   
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+}
+.first{
+    width: 50%;
+}
+.second{
+    background: url('../../Assets/woodland-8479979_1280.jpg');
+    width: 50%;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+
+}
+.mainsigninin{
+    display: flex;
+    width: 80%;
+}
+.input{
+    background: none;
+     width: 280px;
+    border: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    font-size: 20px;
+    padding: 7px 10px;
+    outline: none;
+
+}
+
+.connect{
+    border: 2px solid red;
+    background-color: aqua;
+    width: 350px;
+    width: max-content;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    align-items: center;
+}
+.ic{
+    font-size: 25px;
+    padding-right: 8px;
+    cursor: pointer;
+}
+.rem{
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+}
+.forget{
+    color: rgb(244, 94, 234);
+    margin-left: 85px;
+}
+.forget:hover{
+    text-decoration: underline;
+}
+.seg{
+    justify-items: center;
+}
+#sign-but{
+    background: none;
+    font-size: 20px;
+    width: 200px;
+    padding: 6px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin-left: 60px;
+    cursor: pointer;
+
+}
+#sign-but:hover{
+ background-color: aqua;
+}
+#google{
+    background-color: #ebdaed;
+    width: 330px;
+    height: 35px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    font-size: 20px;
+   cursor: pointer;
+   color: #4c464d;
+}
+.g-icon{
+    color: #c23841;
+}
+.set{
+    display: 'flex';
+        justifyContent: 'center';
+        alignItems: 'center';
+        background: url('https://cdn.pixabay.com/photo/2017/03/25/18/06/color-2174065_640.png');
+        height: 100vh;
+        padding-top: 50px;
+background-size: contain;}

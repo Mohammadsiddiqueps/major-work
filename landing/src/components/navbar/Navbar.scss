@@ -1,0 +1,79 @@
+.navlist{
+   display: flex;
+   list-style: none;
+   margin-right: 20px;
+}
+.header-main{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    // position: fixed;
+    align-items: center;
+    background-color: #cab2d1;
+    padding:10px 0px;
+
+    
+}
+.navbtn{
+    display: flex;
+}
+.navlink {
+    margin-right: 45px;
+    font-size: 20px;
+    font-weight: 500;
+    position: relative; /* Set position relative for pseudo-element positioning */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Add transition for color and text-decoration */
+  }
+  
+  .navlink::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #b73ade; /* Set your desired underline color */
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* Adjust the bottom value to position the underline */
+    transition: width 1s ease; /* Transition for width change */
+  }
+  
+  .navlink:hover::after {
+    width: 100%; /* Expand the width to create the underline effect */
+  }
+  
+
+
+#signin{
+    margin-right: 35px;
+    color: white;
+    border: none;
+    text-decoration: underline;
+    font-size: 20px;
+    padding: 5px;
+}
+#signin:hover{
+    color: #b73ade;
+}
+#join{
+    margin-right: 25px;
+    background-color: #b73ade;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    font-size: 20px;
+    padding: 5px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     padding: 6px 20px;
+     cursor: pointer;
+}
+.logo{
+    font-size: 30px;
+    margin-left: 45px;
+}
