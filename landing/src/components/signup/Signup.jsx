@@ -30,7 +30,7 @@ const Signup = () => {
     .then(response => {
       if (response.status === 201) {
         alert("Signup success");
-navigate('/signup')
+        navigate('/signin')
       } else {
         alert("Signup failed. Please try again.");
       }
@@ -85,8 +85,8 @@ navigate('/signup')
               <input
                 type="radio"
                 name="gender"
-                value="male"
-                checked={formData.gender === 'male'}
+                value="Male"
+                checked={formData.gender === 'Male'}
                 onChange={handleInputChange}
                 required
               />
@@ -96,8 +96,8 @@ navigate('/signup')
               <input
                 type="radio"
                 name="gender"
-                value="female"
-                checked={formData.gender === 'female'}
+                value="Female"
+                checked={formData.gender === 'Female'}
                 onChange={handleInputChange}
                 required
               />
@@ -107,8 +107,8 @@ navigate('/signup')
               <input
                 type="radio"
                 name="gender"
-                value="other"
-                checked={formData.gender === 'other'}
+                value="Other"
+                checked={formData.gender === 'Other'}
                 onChange={handleInputChange}
                 required
               />

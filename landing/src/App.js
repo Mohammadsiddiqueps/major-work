@@ -9,31 +9,23 @@ import User_home from './components/user-home/User_home';
 import Chat from './components/chat/Chat';
 
 function App() {
-  const navigate = useNavigate();
 
-  const shouldShowNavbar = () => {
-    const currentPath = window.location.pathname;
-
-    // Check if the current path is not user_home or signin
-    return !['/user_home', '/signin'].includes(currentPath);
-  };
   return (
     
       <div className="App">
-      {shouldShowNavbar() && <Navbar />}
          <Routes> 
         <Route path='/' element={ <Home/>}/>
         <Route path='/signin' element={ <Signin/>}/>
         <Route path='/signup' element={ <Signup/>}/>
         <Route path='/user_home' element={ <User_home/>}/>
+        <Route path='/chat' element={<Chat/>}></Route>
 
 
         
          
         </Routes>  
 
-        {/* <User_home/> */}
-        {/* <Chat/> */}
+  
       </div>
   
   );

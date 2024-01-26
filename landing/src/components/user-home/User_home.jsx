@@ -3,6 +3,7 @@ import './User_home.scss';
 import { IoChatbox } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 const User_home = () => {
 
   
@@ -14,7 +15,7 @@ const User_home = () => {
       <ul className="navbar-links">
       <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
-        <li><IoChatbox href="/contact"className='nav-icons'>Contact</IoChatbox></li>
+        <li><Link to={'/chat'}><IoChatbox className='nav-icons'></IoChatbox></Link></li>
 
         <li><IoNotifications  href="/profile" className='nav-icons'>Profile</IoNotifications></li>
       <li><button id='become-worker'>Become worker</button></li>
