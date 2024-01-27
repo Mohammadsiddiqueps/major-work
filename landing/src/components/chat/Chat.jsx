@@ -77,7 +77,7 @@ const Chat = () => {
       console.error('Error fetching username search results:', error);
     }
   };
-  
+ 
   useEffect(() => {
     // Call handleSearch when searchQuery changes
     handleSearch();
@@ -86,6 +86,20 @@ console.log(currentUser)
   return (
     <div>
       
+ <style>
+        {currentUser && `
+          @media (max-width: 768px) {
+            .right-list {
+              display: block;
+              width:100%
+            }
+               .left-list {
+                display: none;
+
+            }
+          }
+        `}
+      </style>
         <div className="large-section">
             <div className="left-list">
               <div style={{display:"flex", justifyContent:"space-between"}}>
@@ -102,7 +116,7 @@ console.log(currentUser)
   
             {chatLister.map((chat) => (
               <div key={chat.id} className="chat-item" 
-              onClick={()=>setcurrentUser(chat.name)}
+              onClick={() => setcurrentUser(chat.name)}
               >
                 <div className="profile-circle-left">
                   <img
@@ -122,8 +136,11 @@ console.log(currentUser)
 <h6>No more chats</h6>
 </div>
             </div>
-            <div className="right-list" style={{ backgroundRepeat:'no-repeat',backgroundPosition:'center', backgroundImage: currentUser === '' ? 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFw-_-q0OyGIQipESgDKUP4aZsqETFhcyCGQlRBOLMfZYkRAHLduyZLTYirRZpV7Vcg90&usqp=CAU)' : 'none' }}><div className="top-contact" style={currentUser === '' ? { display: 'none' } : {}}>
+            <div className="right-list" style={{ backgroundRepeat:'no-repeat',backgroundPosition:'center', backgroundImage: currentUser === '' ? 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFw-_-q0OyGIQipESgDKUP4aZsqETFhcyCGQlRBOLMfZYkRAHLduyZLTYirRZpV7Vcg90&usqp=CAU)' : 'none' }}>
+
+              <div className="top-contact" style={currentUser === '' ? { display: 'none' } : {}}>
 <img
+onClick={()=>setcurrentUser('')}
               alt='profile'
                 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSofPxnJT4MLpeCDPJV85tCX7nivJRk22P5fGXq8oGX15Sy2ajQwnEV9vmckA&s' 
                 className="profile-chat-contact"
