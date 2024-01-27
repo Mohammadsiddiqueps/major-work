@@ -6,11 +6,16 @@ router.get('/',(req,res)=>{
     res.json("Its my Backend Learning")
 })
 //get all data
-router.get('/get',async(req,res)=>{
- const workouts=await login.find({}).sort({createdAt: -1})
-res.status(200).json(workouts)
-})
-
+router.get('/get', async (req, res) => {
+    console.log("reacged get path")
+    try {
+      const workouts = await login.find({}).sort({ createdAt: -1 });
+      res.status(200).json(workouts);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 //get a single data
 router.get('/:id',async(req,res)=>{
     const{id}=req.params
@@ -18,6 +23,7 @@ router.get('/:id',async(req,res)=>{
         return res.status(400).json({error:'No such workout'})
      }
     const workouts=await login.findById(id)
+
 if(!workouts){
     res.status(404).json({error:"no such Workout"})
 }
@@ -46,7 +52,7 @@ router.post('/login',async(req,res)=>{
     }
 })
 })
-//create a single data
+//create a single data signup
 router.post('/newuser',async(req,res)=>{
     const {name,username,password,dob,gender,email,confirm}=req.body
     try {
@@ -101,6 +107,23 @@ router.patch('/:id',async(req,res)=>{
     }
         res.status(200).json(workouts)
     })
+//search for the chat
+router.post('/searchchat', async (req, res) => {
+    console.log("reached the search chat")
+    const username = req.body.username; 
+    console.log(username);
+
+    try {
+        const users = await login.find({
+            username: { $regex: username, $options: 'i' },
+        });
+
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
   
 

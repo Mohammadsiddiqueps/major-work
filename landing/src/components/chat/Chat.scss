@@ -46,6 +46,7 @@
     font-size: 20px;
     color: #555;
     margin-right: 10px;
+    cursor: pointer;
   }
   
   .search-chat-input {
@@ -66,7 +67,8 @@
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  border-top: 2px solid red;
+  border-top: 2px solid #8a7c7c;
+
     .profile-circle-left {
       width: 40px;
       height: 40px;
@@ -223,6 +225,16 @@
   margin-right: 20px;
   margin-top: 20px;
 }
-// .chat-message-box-send-div{
-  
-// }
+.onlythischat{
+  background-color: #bcadad;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  font-size: 20px;
+  color: #555;
+}
