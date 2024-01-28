@@ -125,6 +125,50 @@ router.post('/searchchat', async (req, res) => {
     }
 });
 
+
+//chat message strings
+const Message = mongoose.model('Message', {
+    sender: String,
+    content: String,
+  });
+  
+
+
+//chat message sending
+router.post('/send-message', async (req, res) => {
+    const { sender, content } = req.body;
+  
+    try {
+      // Save the message to the database
+      const newMessage = new Message({ sender, content });
+      await newMessage.save();
+  
+      // Emit the message to all connected clients
+      io.emit('receive-message', newMessage);
+  
+      // Respond with success
+      res.status(201).json({ message: 'Message sent successfully' });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+
+
+  //get chat messages for display
+  router.get('/get-messages', async (req, res) => {
+    try {
+      // Retrieve all messages from the database
+      const messages = await Message.find();
+  
+      // Respond with the list of messages
+      res.json(messages);
+    } catch (error) {
+      console.error('Error getting messages:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
   
 
 module.exports=router

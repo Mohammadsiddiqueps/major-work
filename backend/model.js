@@ -1,31 +1,31 @@
-const mongoose = require('mongoose');
 
 // const messageSchema = new mongoose.Schema({
-//   sender: {
+  //   sender: {
 //     type: mongoose.Schema.Types.ObjectId,
 //     ref: 'Login',
 //   },
 //   content: {
-//     type: String,
+  //     type: String,
 //     required: true,
 //   },
 //   timestamp: {
-//     type: Date,
-//     default: Date.now,
+  //     type: Date,
+  //     default: Date.now,
 //   },
 // });
 
 // const chatSchema = new mongoose.Schema({
-//   participants: [
+  //   participants: [
 //     {
-//       type: mongoose.Schema.Types.ObjectId,
-//       ref: 'Login',
-//     },
-//   ],
-//   messages: [messageSchema],
-// });
-
-const loginSchema = new mongoose.Schema({
+  //       type: mongoose.Schema.Types.ObjectId,
+  //       ref: 'Login',
+  //     },
+  //   ],
+  //   messages: [messageSchema],
+  // });
+  
+  const mongoose = require('mongoose');
+  const loginSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -52,16 +52,9 @@ const loginSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  // Reference to Chat schema
-  // chats: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'Chat',
-  //   },
-  // ],
+
 });
 
 const Login = mongoose.model('Login', loginSchema);
-// const Chat = mongoose.model('Chat', chatSchema);
 
 module.exports = Login ;

@@ -11,10 +11,18 @@ const Chat = () => {
   const [currentUser,setcurrentUser]=useState('')
   const [chatLister, setChatLister] = useState([]);
   const [chatList,setChatList]= useState([])
-
-  const sendMessage=()=>{
-    console.log("clicked the icon")
-  }
+const [message,setMessage] = useState('')
+  const sendMessage=(e)=>{
+    e.preventDefault();
+    if (!message) return;
+    const today = new Date();
+    const minutes = today.getMinutes() < 10 ? "0" + today.getMinutes() : today.getMinutes();
+    const time = today.getHours() + ":" + minutes;
+    console.log(currentUser,message,time)
+    document.getElementById('input-in-message').value = '';
+    // const roomId = currentUser;
+    // socket.emit("message-room", roomId, message, user, time, todayDate);
+    setMessage("");  }
   useEffect(() => {
     // Fetch chat list when component mounts
     fetchChatList();
@@ -33,7 +41,6 @@ const Chat = () => {
 //      id: chat._id, name: chat.username}
 // ));
  
-  // console.log(currentUser)
   // console.log(searchQuery)
 
   const handleSearch = async () => {
@@ -82,7 +89,6 @@ const Chat = () => {
     // Call handleSearch when searchQuery changes
     handleSearch();
   }, [searchQuery]);
-console.log(currentUser)
   return (
     <div>
       
@@ -169,7 +175,7 @@ onClick={()=>setcurrentUser('')}
 <div className="chat-message-send" style={currentUser === '' ? { display: 'none' } : {}}>
   <div className="chat-message-text">
 <MdOutlineEmojiEmotions id='icon-in-message'/>
-    <input type='text' id='input-in-message' placeholder='Send some messages'></input>
+    <input type='text' id='input-in-message' placeholder='Send some messages' onChange={(e) => setMessage(e.target.value)}></input>
   </div>
   <IoSend id='chat-send-icon' onClick={sendMessage}/>
 </div>
