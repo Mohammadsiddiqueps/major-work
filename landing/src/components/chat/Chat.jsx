@@ -4,6 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import { IoSend } from "react-icons/io5";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import axios from 'axios';
+import { useMainUsername } from '../../context/Authcontext';
 
 const Chat = () => {
   const [searchQuery,setSearchQuery]=useState('')
@@ -12,7 +13,9 @@ const Chat = () => {
   const [chatLister, setChatLister] = useState([]);
   const [chatList,setChatList]= useState([])
 const [message,setMessage] = useState('')
-  const sendMessage=(e)=>{
+const { mainUsername,setMainUsername } = useMainUsername();
+
+const sendMessage=(e)=>{
     e.preventDefault();
     if (!message) return;
     const today = new Date();
@@ -25,8 +28,16 @@ const [message,setMessage] = useState('')
     setMessage("");  }
   useEffect(() => {
     // Fetch chat list when component mounts
+   
     fetchChatList();
   }, []);
+
+
+
+  
+   
+
+
   const fetchChatList = async () => {
     try {
       const response = await axios.get('http://localhost:5000/get');
@@ -42,7 +53,6 @@ const [message,setMessage] = useState('')
 // ));
  
   // console.log(searchQuery)
-
   const handleSearch = async () => {
     try {
       console.log(searchQuery);
@@ -89,6 +99,8 @@ const [message,setMessage] = useState('')
     // Call handleSearch when searchQuery changes
     handleSearch();
   }, [searchQuery]);
+
+  
   return (
     <div>
       
@@ -110,7 +122,7 @@ const [message,setMessage] = useState('')
             <div className="left-list">
               <div style={{display:"flex", justifyContent:"space-between"}}>
 <h1>Work House</h1>
-<h1>Chats</h1>
+<h1>{mainUsername.username}</h1>
               </div>
 <div className="search-chat">
 <CiSearch id='chat-icon-search' onClick={handleSearch}/>

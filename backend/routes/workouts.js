@@ -30,28 +30,42 @@ if(!workouts){
     res.status(200).json(workouts)
 })
 //login
-router.post('/login',async(req,res)=>{
-    const {username,password}=req.body;
-    console.log(username)
-        console.log(password)
-    login.findOne({username:username})
-    .then(username=>{
-        if(username){
-            if(username.password==password){
-                res.json("Success")
-                 console.log("success login")
-            } 
-            else{
-                console.log("wrong password")
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    console.log(username);
+    console.log(password);
+
+    try {
+        const user = await login.findOne({ username: username });
+
+        if (user) {
+            if (user.password === password) {
+                // Send the user data instead of just "Success"
+                res.json({
+                    status: "Success",
+                    user: {
+                        id: user._id,
+                        username: user.username,
+                        dob: user.dob,
+                        gender: user.gender,
+                        email: user.email,
+                    }
+                });
+                console.log("success login");
+            } else {
+                console.log("wrong password");
+                res.json("Wrong password");
+            }
+        } else {
+            console.log("no record");
+            res.json("No record");
         }
-            
-        }
-        else{
-            res.json("no record")
-            console.log("fail")
+    } catch (error) {
+        console.error("Error during login:", error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
-})
-})
+});
+
 //create a single data signup
 router.post('/newuser',async(req,res)=>{
     const {name,username,password,dob,gender,email,confirm}=req.body

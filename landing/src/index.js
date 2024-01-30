@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { MainUsernameProvider } from './context/Authcontext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
   <React.StrictMode>
-    
+    <MainUsernameProvider>
+
     <App />
+    </MainUsernameProvider>
   </React.StrictMode>
   </BrowserRouter>
 

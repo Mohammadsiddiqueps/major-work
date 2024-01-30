@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { FaUser } from "react-icons/fa";
@@ -8,11 +8,12 @@ import { FaGoogle } from "react-icons/fa";
 import axios, { Axios } from 'axios';
 import { Navigate, useNavigate } from 'react-router';
 import Signup from '../signup/Signup';
+import { useMainUsername } from '../../context/Authcontext';
 const Signin = () => {
 const navigate=useNavigate();
       const [password, setPassword] = useState('');
       const [showPassword, setShowPassword] = useState(false);
-    
+      const { mainUsername,setMainUsername } = useMainUsername();
       const handlePasswordChange = (e) => {
         setPassword(e.target.value);
       };
@@ -20,7 +21,9 @@ const navigate=useNavigate();
       const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
       };
-
+      useEffect(() => {
+        console.log(mainUsername); // This will log the updated state when it changes
+      }, [mainUsername]); 
       const handleFormSubmit=(e)=>{
         e.preventDefault();
         const username = document.getElementById('username').value;
@@ -30,8 +33,11 @@ const navigate=useNavigate();
         console.log(password)
         axios.post('http://localhost:5000/login',{username,password})
 .then(result=>{
-console.log(result)
-if(result.data==="Success"){
+if(result.data.status==="Success"){
+  console.log(result.data.user); // Access user data here
+  setMainUsername(result.data.user)
+  console.log(mainUsername)
+
   alert("login success")
 navigate('/user_home')}
 else{
@@ -41,7 +47,6 @@ else{
 
       }
   return (
-// <body style={{ backgroundColor }}>   
 <div className='set' style={{backgroundColor:"red"}}>
  <div className='mainsignin'> 
             <div className='mainsigninin'>
