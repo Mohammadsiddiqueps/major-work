@@ -137,3 +137,60 @@ color: #e4e5e7;
   color: rgb(99, 126, 90);
   cursor: pointer;
 }
+.notification-panel {
+  position: fixed;
+  top: 45px; /* Adjust the top position according to your design */
+  right: 20%; /* Adjust the right position according to your design */
+  background-color: #fff; /* Background color for the panel */
+  border: 1px solid #ccc; /* Border style */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle elevation effect */
+  width: 400px; /* Adjust the maximum width according to your design */
+  z-index: 1000;
+  height: 100vh; /* Set a high z-index to ensure it's above other elements */
+}
+
+.notification-top {
+  background-color: #3498db; /* Background color for the top/header of the panel */
+  color: #fff; /* Text color for the top/header text */
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.notification-list {
+  padding: 10px;
+  background-color: #7c93c1;
+  height: 100%;
+  overflow-y: auto;
+}
+.threedots-notification{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.new-notification-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px; /* Adjust the width of the dot */
+  height: 10px; /* Adjust the height of the dot */
+  background-color: rgb(119, 5, 5); /* Adjust the color of the dot */
+  border-radius: 50%; /* Make it a circle */
+}
+
+
+.notification-dot {
+  position: absolute;
+  top: 5px; /* Adjust the top position to align the dot */
+  right: 5px; /* Adjust the right position to align the dot */
+  color: green; /* Adjust the color of the dot */
+}
+.nots{
+  height: fit-content;
+  width: 100%;
+  // background-color: aqua;
+  border-bottom: 2px solid brown;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
