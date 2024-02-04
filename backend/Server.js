@@ -34,21 +34,21 @@ mongoose
     console.error('MongoDB Connection Error:', error);
   });
 
-// Socket.io setup
-io.on('connection', (socket) => {
-  console.log('User connected:', socket.id);
+// // Socket.io setup
+// io.on('connection', (socket) => {
+//   console.log('User connected:', socket.id);
 
-  // Handle message events
-  socket.on('send-message', (data) => {
-    // Broadcast the message to all connected clients
-    io.emit('receive-message', data);
-  });
+//   // Handle message events
+//   socket.on('send-message', (data) => {
+//     // Broadcast the message to all connected clients
+//     io.emit('receive-message', data);
+//   });
 
-  // Handle disconnect
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-  });
-});
+//   // Handle disconnect
+//   socket.on('disconnect', () => {
+//     console.log('User disconnected:', socket.id);
+//   });
+// });
 
 // Start the server
 server.listen(PORT, () => {

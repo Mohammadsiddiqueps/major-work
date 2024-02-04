@@ -41,12 +41,15 @@
     object-fit: cover;
     border-radius: 50%;
     transition: transform 0.3s ease-in-out;
+    z-index: 2;
+
   }
   
   .profile-circle:hover .profile-image {
     transform: scale(1.1); /* Scale up the image on hover */
   }
-#become-worker{
+.become-worker{
+  cursor: pointer;
   background: none;
   border: 3px solid #e4e5e7;
   padding: 12px;
@@ -61,7 +64,7 @@ color: #e4e5e7;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-#become-worker:hover{
+.become-worker:hover{
     background-color: rgb(174, 170, 110);
     color: #e4e5e7;
     border: 3px solid rgb(174, 170, 110);
@@ -193,4 +196,28 @@ color: #e4e5e7;
   border-bottom: 2px solid brown;
   margin-bottom: 10px;
   cursor: pointer;
+}
+.profile-panel {
+  position: fixed;
+  top: 50px;
+  right: 63px;
+  border: 9px solid #ccc;
+  background-color: #ccc;
+  box-shadow: 20px 20px 10px rgba(221, 168, 168, 0.1);
+  width: 200px;
+  z-index: 1;
+  padding: 10px;
+  border-radius:5px ;
+  -webkit-border-radius:5px ;
+  -moz-border-radius:5px ;
+  -ms-border-radius:5px ;
+  -o-border-radius:5px ;
+}
+.profile-panel-sections{
+  border-bottom: 2px solid #3498db;
+  text-align: center;
+  padding-bottom: 15px;
+p {
+    margin-bottom: 4px; /* Adjust the margin between paragraphs */
+  }
 }

@@ -141,24 +141,25 @@ router.post('/searchchat', async (req, res) => {
 
 
 //chat message strings
-const Message = mongoose.model('Message', {
-    sender: String,
-    content: String,
-  });
+const Message = require('../messageschema')
+
   
 
 
 //chat message sending
-router.post('/send-message', async (req, res) => {
-    const { sender, content } = req.body;
+router.post('/sendmessage', async (req, res) => {
+    console.log("reached semd message  ")
+    const { sender, content,receiver,time,date } = req.body;
+    console.log(req.body)
   
     try {
       // Save the message to the database
-      const newMessage = new Message({ sender, content });
+      const newMessage = new Message({ sender, content ,receiver,time,date});
       await newMessage.save();
+      console.log("done correct")
   
       // Emit the message to all connected clients
-      io.emit('receive-message', newMessage);
+    //   io.emit('receive-message', newMessage);
   
       // Respond with success
       res.status(201).json({ message: 'Message sent successfully' });
@@ -171,18 +172,31 @@ router.post('/send-message', async (req, res) => {
 
 
   //get chat messages for display
-  router.get('/get-messages', async (req, res) => {
+  // server.js
+
+router.post('/get-messages', async (req, res) => {
     try {
-      // Retrieve all messages from the database
-      const messages = await Message.find();
-  
-      // Respond with the list of messages
-      res.json(messages);
+        console.log("reached get message")
+        const { email } = req.body;
+        // Retrieve all messages from the database
+        console.log(email)
+        // Retrieve all messages from the database
+        const messages = await Message.find({
+            $or: [
+                {receiver: email },
+                { sender: email}
+            ]
+        }).sort({ timestamp: 1 }); // Sort messages by timestamp, adjust as needed
+console.log(messages)
+        // Respond with the list of messages
+        res.json(messages);
     } catch (error) {
-      console.error('Error getting messages:', error);
-      res.status(500).json({ error: 'Internal server error' });
+        console.error('Error getting messages:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-  });
-  
+});
+
+
+
 
 module.exports=router

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
 const MessageSchema = new mongoose.Schema({
+  sender: String,
   content: String,
-  from: Object,
-  socketid: String,
+  receiver: String,
   time: String,
-  date: String,
-  to: String
+  date: String
 })
 
 const Message = mongoose.model('Message', MessageSchema);

@@ -22,7 +22,14 @@ const navigate=useNavigate();
         setShowPassword(!showPassword);
       };
       useEffect(() => {
+        const storedUserData = localStorage.getItem('userData');
+        if(storedUserData){
+        console.log("already loogin")
+setMainUsername(storedUserData)
+navigate('/user_home')
+       }
         console.log(mainUsername); // This will log the updated state when it changes
+      
       }, [mainUsername]); 
       const handleFormSubmit=(e)=>{
         e.preventDefault();
@@ -36,7 +43,9 @@ const navigate=useNavigate();
 if(result.data.status==="Success"){
   console.log(result.data.user); // Access user data here
   setMainUsername(result.data.user)
+  
   console.log(mainUsername)
+  localStorage.setItem('userData', JSON.stringify(result.data.user));
 
   alert("login success")
 navigate('/user_home')}
