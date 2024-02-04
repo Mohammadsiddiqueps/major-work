@@ -199,7 +199,7 @@ const Chat = () => {
           className="profile-chat-message-recieve"
         />
         <div className="chat-message-box-recieve">
-          {message.content}
+          {message.content}<p className='message-time'>{message.time}</p>
         </div>
       </div>
       ) : (
@@ -207,7 +207,7 @@ const Chat = () => {
       <div className="just">
 
          <div className="chat-message-box-send">
-         {message.content}
+         {message.content}<p className='message-time'>{message.time}</p>
        </div>
       </div>
       )}
