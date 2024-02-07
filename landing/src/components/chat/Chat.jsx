@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Chat.scss';
 import EmojiPicker from 'emoji-picker-react';
-
-// import 'emoji-mart/css/emoji-mart.css';
-import { Picker } from 'emoji-mart';
-import { Data } from 'emoji-mart';
 import { CiSearch } from "react-icons/ci";
 import { IoSend } from "react-icons/io5";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import axios from 'axios';
 import { useMainUsername } from '../../context/Authcontext';
+import { io } from 'socket.io-client';
 
 const Chat = () => {
   const [fetchedMessages, setFetchedMessages] = useState([]);
@@ -19,63 +16,59 @@ const Chat = () => {
   const [chatLister, setChatLister] = useState([]);
   const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState('');
-  const [messageDate, setMessageDate] = useState('');
   const [lastDisplayedDate, setLastDisplayedDate] = useState('');
   const { mainUsername, setMainUsername } = useMainUsername();
-const [emojiOpen,setEmojiOpen]=useState(false)
-
+  const [emojiOpen, setEmojiOpen] = useState(false);
+  const socket = useRef(null);
 
   const ha = localStorage.getItem('userData');
   const userData = JSON.parse(ha);
 
   const sendMessage = async () => {
     if (!message) return;
+  
     const today = new Date();
     const minutes = today.getMinutes() < 10 ? "0" + today.getMinutes() : today.getMinutes();
     const time = today.getHours() + ":" + minutes;
-
-    document.getElementById('input-in-message').value = '';
-
+  
     try {
-      await axios.post('http://localhost:5000/sendmessage', {
-        sender: userData.email,
-        content: message,
-        receiver: currentUser.email,
-        time: time,
-        date: today,
-      });
-
-      // Handle success
+      await socket.current.emit("message-room", userData.email, message, currentUser.email, time, today);
+      await fetchChatMessages(); // Wait for fetching messages to complete
     } catch (error) {
-      // Handle error
       console.error('Error sending message:', error);
     }
-
+  
+    // Reset message state after sending
     setMessage('');
+    scrollToBottom();
   };
+  
+  const fetchChatMessages = () => {
+    socket.current.on('room-messages', (messages) => {
+      setFetchedMessages(messages);
+    });
 
-  // Client-side code using axios.post
-  const fetchChatMessages = async () => {
-    try {
-      const response = await axios.post('http://localhost:5000/get-messages', {
-        email: userData.email,
-      });
-
-      setFetchedMessages(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error fetching chat messages:', error);
-    }
+    socket.current.emit('get-messages', userData.email);
   };
 
   useEffect(() => {
-    // Fetch chat list when the component mounts
+    socket.current = io('http://localhost:5000');
+
+    // Clean up socket on unmount
+    return () => {
+      if (socket.current) {
+        socket.current.disconnect();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     console.log(userData.username);
     fetchChatList();
     fetchChatMessages();
     scrollToBottom();
     console.log(currentUser);
-  }, [currentUser]); // Updated dependency
+  }, [currentUser,fetchedMessages]); // Updated dependency
 
   const fetchChatList = async () => {
     try {
@@ -120,29 +113,36 @@ const [emojiOpen,setEmojiOpen]=useState(false)
     handleSearch();
   }, [searchQuery]);
 
-  useEffect(() => {
-    if (fetchedMessages.length > 0) {
-      const firstMessageDate = new Date(fetchedMessages[0].date).toLocaleDateString();
-      const lastMessageDate = new Date(fetchedMessages[fetchedMessages.length - 1].date).toLocaleDateString();
-      
-      setLastDisplayedDate(firstMessageDate);
-  
-      // Check if the last displayed date is different from the new last message date
-      if (lastDisplayedDate !== lastMessageDate) {
-        scrollToBottom();
-      }
-    }
-  }, [fetchedMessages, lastDisplayedDate]);
-  
+  // useEffect(() => {
+    // if (fetchedMessages.length > 0) {
+    //   const firstMessageDate = new Date(fetchedMessages[0].date).toLocaleDateString();
+    //   const lastMessageDate = new Date(fetchedMessages[fetchedMessages.length - 1].date).toLocaleDateString();
+
+    //   setLastDisplayedDate(firstMessageDate);
+
+    //   if (lastDisplayedDate !== lastMessageDate) {
+    //     scrollToBottom();
+    //   }
+    // }
+  // }, [fetchedMessages, lastDisplayedDate]);
 
   const chatContainerRef = useRef(null);
 
-  // Function to scroll to the bottom of the chat container
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   };
+  useEffect(() => {
+  socket.current.on('room-messages', (messages) => {
+    console.log('Received new messages:', messages);
+    setFetchedMessages((prevMessages) => [...prevMessages, ...messages]);
+    scrollToBottom(); // Scroll to bottom when new messages are received
+  });
+
+  // Fetch initial messages when component mounts
+  fetchChatMessages();
+}, []);
 
   return (
     <div>
@@ -255,17 +255,12 @@ const [emojiOpen,setEmojiOpen]=useState(false)
 
               {emojiOpen && (
               <EmojiPicker style={{ zIndex: 1000, position: 'absolute', bottom: '60px', right: '40%' }}
-              // onSelect={(emoji) => {
-              //   console.log(emoji);
-              // }}
               onEmojiClick={
-
                 (emoji) => {
                   setMessage((prevMessage) => prevMessage + emoji.emoji);
                   console.log(emoji);
                   setEmojiOpen(!emojiOpen);
-
-                }              }              />
+                }}/>
               )}
                 </div>
           <div className="chat-message-send" style={currentUser === '' ? { display: 'none' } : {}}>

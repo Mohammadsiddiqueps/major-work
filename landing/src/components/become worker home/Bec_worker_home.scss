@@ -1,0 +1,107 @@
+.becworkermain {
+    height: 100vh;
+    width: 100%;
+    background: url('https://t4.ftcdn.net/jpg/05/79/54/53/360_F_579545387_6JuKZXKyBuvrGTVxcCIXPZnE5cr41vC9.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.becworkerform{
+    height: 80vh;
+    margin: auto;
+    width: 70%;
+    background-color: rgb(0, 141, 71);
+}
+.becbutton {
+    background-color: rgb(58, 70, 66);
+    height: 45px;
+    width: 200px;
+    font-size: 20px;
+    position: absolute;
+    top: 88%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: rgb(77, 240, 71);
+  }
+  .becdet{
+    height: 80vh;
+    margin: auto;
+    width: 70%;
+    border: 5px solid rgb(0, 141, 71);
+    // background-color: rgb(0, 141, 71);
+   #h1becdet{
+        color: aqua;
+        text-align: center;
+    }
+  }
+  .becbutton .FaArrowUp {
+    margin-left: 10px;
+    color: rgb(51, 157, 90);
+  }
+  .becbutton:hover {
+    background-color: lightgreen;
+    color: rgb(45, 38, 38);
+  }
+  .becworkerform form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .becworkerform label {
+    margin-bottom: 10px;
+  }
+  
+  .becworkerform input[type="text"],
+  .becworkerform input[type="file"],
+  .becworkerform textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .becworkerform textarea {
+    height: 100px; /* Adjust height as needed */
+  }
+  
+  .becworkerform button[type="submit"] {
+    background-color: aquamarine;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .becworkerform button[type="submit"]:hover {
+    background-color: lightgreen;
+  }
+  .profile-input {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-input input[type="file"] {
+    margin-right: 10px;
+  }
+  
+  .profile-preview {
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  

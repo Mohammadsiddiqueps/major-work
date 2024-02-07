@@ -179,7 +179,7 @@ router.post('/get-messages', async (req, res) => {
         console.log("reached get message")
         const { email } = req.body;
         // Retrieve all messages from the database
-        console.log(email)
+        // console.log(email)
         // Retrieve all messages from the database
         const messages = await Message.find({
             $or: [
@@ -187,7 +187,7 @@ router.post('/get-messages', async (req, res) => {
                 { sender: email}
             ]
         }).sort({ timestamp: 1 }); // Sort messages by timestamp, adjust as needed
-console.log(messages)
+// console.log(messages)
         // Respond with the list of messages
         res.json(messages);
     } catch (error) {
